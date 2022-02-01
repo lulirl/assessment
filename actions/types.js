@@ -1,0 +1,1 @@
+export const DECODE_QR_AND_STORE = "DECODE_QR_AND_STORE";

@@ -1,15 +1,18 @@
 import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import { Provider } from "react-redux";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import ReadQr from './src/ReadQr';
-import QrList from './src/QrList';
+import ReadQr from './screens/ReadQr';
+import QrList from './screens/QrList';
+import store from "./store/index.js"
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
+    <Provider store={store}>
     <NavigationContainer>
       <Tab.Navigator
         screenOptions={({ route }) => ({
@@ -35,5 +38,6 @@ export default function App() {
         <Tab.Screen name="QrList" component={QrList} />
       </Tab.Navigator>
     </NavigationContainer>
+    </Provider>
   );
 }
