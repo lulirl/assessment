@@ -1,7 +1,7 @@
 import {DECODE_QR_AND_STORE} from "../actions/types.js"
 
 const initialState = {
-    QrData: []
+    QrData:[]
 }
 
 export default function rootReducer(state = initialState, action) {
@@ -10,7 +10,7 @@ export default function rootReducer(state = initialState, action) {
         
         return {
           ...state,
-          QrData: { ...action.payload }, 
+          QrData: state.QrData.concat(action.payload) 
         };
         default:
       return state;

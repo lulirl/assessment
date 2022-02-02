@@ -1,10 +1,13 @@
-import React from "react"
-import {StyleSheet, View, Text,} from "react-native"
+import React, {useState} from "react"
+import { useSelector } from "react-redux";
+import {StyleSheet, View, Text,FlatList, TextInput} from "react-native"
 
 function QrList( ) {
+    var qrStrings = useSelector((state) => state.QrData);
+  
     return ( 
        <View style={styles.body}>
-        <Text style={styles.text}>QrList</Text>
+        <Text>Qr List</Text>
        </View>
      );
 }
@@ -14,12 +17,8 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center"
     }, 
-    text:{
-        fontSize: 20,
-        fontWeight: "bold",
-        margin: 10
-
-    }
+  
+    
 })
 
 export default QrList
