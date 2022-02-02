@@ -20,7 +20,7 @@ function ReadQr( ) {
     setScanned(true);
     // data = JSON.stringify(data)
     alert(`Bar code with type ${type} and data ${data} has been scanned!`); 
-    console.log("data", data)
+    
     dispatch(decodeQrAndStore(data))
    
   };

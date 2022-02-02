@@ -2,18 +2,23 @@ import React, {useState} from "react"
 import { useSelector } from "react-redux";
 import {StyleSheet, View, Text,FlatList, TextInput} from "react-native"
 
+
 function QrList( ) {
     var qrStrings = useSelector((state) => state.QrData);
     const [search, setSearch] = useState("")
+   
+    const filteredData = search ? qrStrings.filter((x)=> x.toLowerCase().includes(search.toLowerCase())) : qrStrings
+    
+
     return ( 
        <View style={styles.body}>
         <TextInput style={styles.input}
-        placeholder="search..."
-        onChangeText={(value)=> setSearch(value)}/>
-        <Text>{search}</Text>
+        placeholder="Search QR Text..."
+        onChangeText={(value)=> setSearch(value)}
+        value={search}/> 
         <FlatList
         keyExtractor={(item, index) => index.toString()}
-        data={qrStrings}
+        data={filteredData}
         renderItem={({item})=> (
             <Text style={styles.item}>{item}</Text>
         )}/>
@@ -27,18 +32,20 @@ const styles = StyleSheet.create({
         alignItems: "center"
     }, 
     input:{
-        borderWidth: 1, 
-        borderColor: "black",
+        borderWidth: 5, 
+        borderRadius:10,
+        borderColor: "#00C9F5",
         padding: 8, 
         margin: 10,
-        width: 200 
+        width: 300 
 
     }, 
     item: {
         marginTop: 24,
         padding: 30,
-        backgroundColor: "blue",
-        fontSize: 24
+        backgroundColor:'#00C9F5',
+        fontSize: 20,
+     
     }
 })
 
