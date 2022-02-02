@@ -1,10 +1,11 @@
 import React, {useState} from "react"
 import { useSelector } from "react-redux";
 import {StyleSheet, View, Text,FlatList, TextInput} from "react-native"
+import QrItem from "./QrItem";
 
 
 function QrList( ) {
-    var qrStrings = useSelector((state) => state.QrData);
+    const qrStrings = useSelector((state) => state.QrData);
     const [search, setSearch] = useState("")
    
     const filteredData = search ? qrStrings.filter((x)=> x.toLowerCase().includes(search.toLowerCase())) : qrStrings
@@ -15,37 +16,40 @@ function QrList( ) {
         <TextInput style={styles.input}
         placeholder="Search QR Text..."
         onChangeText={(value)=> setSearch(value)}
-        value={search}/> 
+        value={search}/>
+        {filteredData.length > 0 ? 
         <FlatList
+        style={styles.list}
         keyExtractor={(item, index) => index.toString()}
         data={filteredData}
         renderItem={({item})=> (
-            <Text style={styles.item}>{item}</Text>
-        )}/>
+            // <Text style={styles.item}>{item}</Text>
+            <QrItem item={item}/>
+        )}/> : <Text style={styles.text}>No Qr found</Text>
+}
        </View>
      );
 }
 const styles = StyleSheet.create({
     body: {
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        paddingHorizontal: 20,
     }, 
     input:{
         borderWidth: 5, 
         borderRadius:10,
-        borderColor: "#00C9F5",
-        padding: 8, 
+        borderColor: "#52b788",
+        padding: 15, 
         margin: 10,
-        width: 300 
-
+        width: "100%" 
     }, 
-    item: {
-        marginTop: 24,
-        padding: 30,
-        backgroundColor:'#00C9F5',
+    list:{
+        width: "100%"
+    },
+    text: {
         fontSize: 20,
-     
+        paddingVertical: 15,
     }
 })
 
